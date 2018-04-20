@@ -15,10 +15,22 @@ public class Test5 {
     }
 }
 
-interface MyParent5 {
-    public static int a = new Random().nextInt(3);
+interface MyGrandPa {
+    public static Thread thread = new Thread(){
+        {
+            System.out.println("MyGrandPa invoke");
+        }
+    };
+}
+
+interface MyParent5 extends MyGrandPa {
+    public static Thread thread = new Thread(){
+        {
+            System.out.println("MyParent5 invoke");
+        }
+    };
 }
 
 interface MyChild5 extends MyParent5 {
-    public static int b = new Random().nextInt(4);
+    public static int b = 6;
 }
