@@ -4,6 +4,11 @@ package com.eli.jvm.classloader;
  * Created by zhouyilin on 2018/4/19.
  *
  * 调用ClassLoader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化
+ *  class com.eli.jvm.classloader.CL
+    ------
+    Class CL
+    class com.eli.jvm.classloader.CL
+
  */
 public class Test12 {
     public static void main(String[] args) throws Exception{
