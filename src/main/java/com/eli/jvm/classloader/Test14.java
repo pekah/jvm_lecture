@@ -19,5 +19,11 @@ public class Test14 {
             URL url = urls.nextElement();
             System.out.println(url);
         }
+
+        System.out.println("-----");
+
+        Class strClss = String.class;
+        System.out.println(strClss.getClassLoader()); // 输出null。BootStrap加载器
+
     }
 }
