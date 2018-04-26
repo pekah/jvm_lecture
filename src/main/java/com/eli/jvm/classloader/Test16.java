@@ -10,7 +10,12 @@ import java.io.InputStream;
 public class Test16 extends ClassLoader{
 
     private String classLoaderName;
+    private String path;
     private String fileExtension = ".class";
+
+    public void setPath(String path){
+        this.path = path;
+    }
 
     public Test16(String classLoaderName){
         super();
@@ -23,12 +28,22 @@ public class Test16 extends ClassLoader{
     }
 
     public static void main(String[] args) throws Exception {
-        Test16 test16 = new Test16("myLoader");
-        test(test16);
+        Test16 classLoader = new Test16("myLoader"); // 默认的父类加载器是系统类加载器
+        classLoader.setPath("/Users/zhouyilin/Desktop/test/");
+        // 当加载Test15时，先委托父类加载器加载，父类加载器会继续委托到最顶级Bootstrap加载器，最后会到系统类加载器加载
+        // 如果把classpath下的Test15.class文件删掉，父类加载器（系统类加载器）无法在classpath下加载到，此时会由自定义的
+        // myLoader类加载器加载
+        Class<?> clazz = classLoader.loadClass("com.eli.jvm.classloader.Test15");
+        System.out.println("class hascode:" + clazz.hashCode());
+        Object object = clazz.newInstance();
+        System.out.println(object);
+
     }
 
     @Override
     protected Class<?> findClass(String className) throws ClassNotFoundException {
+        System.out.println("findCLass invoke");
+        System.out.println("class loader name" + this.classLoaderName);
         byte[] classData = loadClassData(className);
 
         return this.defineClass(className, classData, 0, classData.length);
@@ -39,10 +54,10 @@ public class Test16 extends ClassLoader{
         byte[] data = null;
         ByteArrayOutputStream byteArrayOutputStream = null;
 
-        try {
-            this.classLoaderName = this.classLoaderName.replace(".", "/");
+        className = className.replace(".", "/");
 
-            inputStream = new FileInputStream(className + this.fileExtension);
+        try {
+            inputStream = new FileInputStream(this.path + className + this.fileExtension);
             byteArrayOutputStream = new ByteArrayOutputStream();
 
             int ch;
@@ -67,9 +82,4 @@ public class Test16 extends ClassLoader{
         return data;
     }
 
-    public static void test (ClassLoader classLoader) throws Exception {
-        Class<?> clazz = classLoader.loadClass("com.eli.jvm.classloader.Test15");
-        Object instance = clazz.newInstance();
-        System.out.println(instance);
-    }
 }
