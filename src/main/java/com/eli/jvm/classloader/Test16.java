@@ -38,6 +38,15 @@ public class Test16 extends ClassLoader{
         Object object = clazz.newInstance();
         System.out.println(object);
 
+        System.out.println("------");
+        // 每个类加载器都有自己的命名空间，命名空间由该加载器及所有父加载器所加载的类组成。因此两个类的hascode不一致
+        Test16 classLoader2 = new Test16("classLoader2");
+        classLoader2.setPath("/Users/zhouyilin/Desktop/test/");
+        Class<?> clazz2 = classLoader2.loadClass("com.eli.jvm.classloader.Test15");
+        System.out.println("class hascode:" + clazz2.hashCode());
+        Object object2 = clazz2.newInstance();
+        System.out.println(object2);
+
     }
 
     @Override
