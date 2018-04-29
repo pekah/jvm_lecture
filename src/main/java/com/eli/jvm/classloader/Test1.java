@@ -6,6 +6,8 @@ package com.eli.jvm.classloader;
  * 当一个类在初始化时，要求其父类全部都已经初始化完毕
  * 由于首次主动使用类时才会被初始化，因此同时打印str和str2时，MyParent1 static block只会打印一次
  *
+ * 类加载器并不需要等到某个类被“首次主动使用”时再加载它。
+ * 比如调用MyChild1.str2时，此时主动使用的是MyParent1类，该类会被加载。使用-XX:+TraceClassLoading可以发现MyChild1也被加载了
  *
  *
  * -XX:+TraceClassLoading，用于追踪类的加载信息并打印出来
