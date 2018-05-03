@@ -35,6 +35,8 @@ public class Test23 {
          */
 
         // 扩展类加载器与系统类加载器也是由启动类加载器所加载的
+        // 原因是加载Launcher类的类加载器会去尝试加载Launcher类里面所包含的类（前提是包含的类未加载），
+        // 因此，只要Launcher类是启动类加载器加载，扩展类加载器与系统类加载器也是由启动类加载器所加载的
         System.out.println(Launcher.class.getClassLoader());
     }
 }
