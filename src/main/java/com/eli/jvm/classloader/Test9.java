@@ -16,7 +16,7 @@ public class Test9 {
      *  Test9 static block
         Parent static block
         Child static block
-     4
+        4
      */
     public static void main(String[] args) {
         System.out.println(Child.b);

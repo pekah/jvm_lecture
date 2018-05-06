@@ -3,7 +3,8 @@ package com.eli.jvm.classloader;
 /**
  * Created by zhouyilin on 2018/4/19.
  *
- * 调用ClassLoader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化
+ * 调用ClassLoader类的loadClass方法加载一个类，并不是对类的主动使用，不会导致类的初始化。
+ * Class.forName(String className)只有一个参数的方法，会初始化传入的类名，因此会导致CL类的初始化。
  *  class com.eli.jvm.classloader.CL
     ------
     Class CL
