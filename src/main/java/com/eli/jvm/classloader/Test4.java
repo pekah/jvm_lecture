@@ -21,6 +21,8 @@ public class Test4 {
         MyParent4[][] myParent4s1 = new MyParent4[1][1];
         System.out.println(myParent4s1.getClass());
 
+        // 数组类型调用getClassLoader的返回值与数组里的元素的返回值相同
+        System.out.println(myParent4s.getClass().getClassLoader());
         System.out.println(myParent4s.getClass().getSuperclass());
         System.out.println(myParent4s1.getClass().getSuperclass());
 
